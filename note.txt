@@ -1,0 +1,52 @@
+$MyData = file_get_contents('dataemp.json'); 
+    // var_dump($MyData);
+    $array_data = json_decode($MyData);
+    
+    
+
+
+    if (isset($_POST["login"])) {
+
+        foreach($array_data as $value){
+        
+           
+
+        if ($_POST["username"] === $value -> Fullname &&  $_POST["password"] === $value -> Password) {
+            echo 'YEEEEEEH';
+            session_start();
+            $_SESSION["USERNAME"] = $_POST["username"];
+            $_SESSION["PASSWORD"] = $_POST["password"];
+            $_SESSION["LOGIN"] = true;
+
+            echo "<script> location.replace('index.php')  </script>";
+
+            echo "welcome " . $_POST["username"] . "to your ...";
+            break;
+        } else {
+            echo "sorry! your  login invalide";
+        }
+        
+
+}
+
+
+
+
+$MyData = file_get_contents('dataemp.json'); 
+    $array_data = json_decode($MyData);  
+      if (isset($_POST["login"])) {
+   
+    foreach ($array_data as $value ) {
+        if ($value -> Fullname === $_POST["Fullname"]  ) {
+            echo "done";
+            // session_start();
+            // $_SESSION["FULLNAME"] = $_POST["Fullname"];
+            // $_SESSION["PASSWORD"] = $_POST["password"];
+            // $_SESSION["LOGIN"] = true;
+            // header("location: index.php ");
+        }
+        else{
+            echo "error  ! your password or fullname error" ;
+            }           
+    }
+    }
