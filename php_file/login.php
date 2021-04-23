@@ -1,6 +1,7 @@
 <?php
 $message = '';
 $error = '';
+$error_signup ='';
 //  <!-- sign in -->
 
 if (isset($_POST["login"])) {
@@ -23,7 +24,7 @@ if ($key->Fullname === $_POST["Fullname"] && password_verify($_POST["password"],
             header("location: index.php ");
             session_start();
             $_SESSION["FULLNAME"] = $_POST["Fullname"];
-
+            $_SESSION["PASSWORD"] = $_POST["password"];
             $_SESSION["LOGIN"] = true;
         } 
         // else {
@@ -47,13 +48,13 @@ if (isset($_POST["signup"])) {
     $ps = $_POST["Password"];
     $password_hash = password_hash($ps, PASSWORD_DEFAULT);
     if (empty($_POST["Fullname"])) {
-        $error = "<label  class='text-danger' >Enter Fullname </label>";
+        $error_signup = "<label  class='text-danger' >Enter Fullname </label>";
     } else if (empty($_POST["D_License"])) {
-        $error = "<label class='text-danger'>Enter number Driver License </label>";
+        $error_signup = "<label class='text-danger'>Enter number Driver License </label>";
     } else if (empty($_POST["Email"])) {
-        $error = "<label class='text-danger'>Enter Email</label>";
+        $error_signup = "<label class='text-danger'>Enter Email</label>";
     } else if (empty($password_hash)) {
-        $error = "<label class='text-danger'>Enter Password</label>";
+        $error_signup = "<label class='text-danger'>Enter Password</label>";
     } else {
         if (file_exists('dataemp.json')) {
             $datajson = file_get_contents('dataemp.json');
@@ -70,7 +71,7 @@ if (isset($_POST["signup"])) {
                 $message = "<label class='text-success'>Account created</label>";
             }
         } else {
-            $error = 'JSON File not exist';
+            $error_signup = 'JSON File not exist';
         }
     }
 }
@@ -135,8 +136,8 @@ if (isset($_POST["signup"])) {
                         <form method="post">
                             <h1> Sign up </h1>
                             <?php
-                            if (isset($error)) {
-                                echo $error;
+                            if (isset($error_signup)) {
+                                echo $error_signup;
                             }
                             ?>
                             <p>
