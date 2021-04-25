@@ -1,3 +1,18 @@
+<?php
+session_start();
+if (!isset($_POST["login"])) {
+  header('location: login.php');
+}
+// echo"welcome </br>";
+// session_start();
+//  echo "welcome " . " " .$_SESSION["FULLNAME"]  ;
+//  echo "<form method='post'> <button type='submit' name='logout'> LOGOUT </button> </form>";
+if (isset($_POST["logout"])) {
+  session_unset();
+  session_destroy();
+  header("location: login.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,8 +31,11 @@
   <nav class="navbar navbar-inverse">
     <div class="container-fluid">
       <div class="navbar-header">
-        <a style="color: #EF711D;" class="navbar-brand" href="#"><?php session_start();
-                                                                  echo "welcome " . " " . $_SESSION["FULLNAME"]  ?></a>
+        <a style="color: #EF711D;" class="navbar-brand" href="#"></a>
+        <?php
+        // session_start();
+        //    echo "welcome " . " " . $_SESSION["FULLNAME"]  
+        ?>
       </div>
       <ul class="nav navbar-nav">
         <li class="active"><a href="#">Home</a></li>
@@ -52,14 +70,3 @@
 </body>
 
 </html>
-<?php
-// echo"welcome </br>";
-// session_start();
-//  echo "welcome " . " " .$_SESSION["FULLNAME"]  ;
-//  echo "<form method='post'> <button type='submit' name='logout'> LOGOUT </button> </form>";
-if (isset($_POST["logout"])) {
-  session_unset();
-  session_destroy();
-  header("location: login.php");
-}
-?>
